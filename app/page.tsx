@@ -497,11 +497,12 @@ export default function Home() {
         boxSizing: "border-box",
       }}>
         {/* Mobile title/description - only shown before game starts */}
+        {/*
         {!started && isMobile && (
           <div style={{
             position: "absolute",
             inset: 0,
-            background: "rgba(0,0,0,0.55)",
+            // background: "rgba(0,0,0,0.55)",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -514,6 +515,7 @@ export default function Home() {
               Controls: <b>Space / ↑</b> or <b>click/tap</b>.<br />
               Restart with the <b>Restart</b> button.
             </div>
+            {/*
             <button
               onClick={() => startNewGame(true)}
               style={{
@@ -529,8 +531,11 @@ export default function Home() {
             >
               Start
             </button>
+            
+
           </div>
-        )}
+          
+        )} */}
         
         <canvas ref={canvasRef} />
         {/* Overlay for both start and game over */}
