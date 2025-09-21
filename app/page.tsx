@@ -496,47 +496,6 @@ export default function Home() {
         flexShrink: 0,
         boxSizing: "border-box",
       }}>
-        {/* Mobile title/description - only shown before game starts */}
-        {/*
-        {!started && isMobile && (
-          <div style={{
-            position: "absolute",
-            inset: 0,
-            // background: "rgba(0,0,0,0.55)",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            textAlign: "center",
-            gap: 20,
-          }}>
-            <h1 style={{ fontSize: 28, fontWeight: 700, margin: 0, color: "#fff" }}>Bird 🐤</h1>
-            <div style={{ fontSize: 14, opacity: 0.9, color: "#fff" }}>
-              Controls: <b>Space / ↑</b> or <b>click/tap</b>.<br />
-              Restart with the <b>Restart</b> button.
-            </div>
-            {/*
-            <button
-              onClick={() => startNewGame(true)}
-              style={{
-                padding: "10px 18px",
-                fontSize: 16,
-                fontWeight: 700,
-                background: "#fff",
-                color: "#000",
-                border: "none",
-                borderRadius: 60,
-                cursor: "pointer",
-              }}
-            >
-              Start
-            </button>
-            
-
-          </div>
-          
-        )} */}
-        
         <canvas ref={canvasRef} />
         {/* Overlay for both start and game over */}
         {(!started || (started && !running)) && (
@@ -544,14 +503,25 @@ export default function Home() {
             style={{
               position: "absolute",
               inset: 0,
-              background: "rgba(0,0,0,0.55)",
+              background: isMobile && !started ? "#fff" : "rgba(0,0,0,0.55)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               flexDirection: "column",
-              gap: 20,
+              gap: 32,
             }}
           >
+            {/* Mobile title/description - only shown before game starts on mobile */}
+            {!started && isMobile && (
+              <div style={{ textAlign: "center" }}>
+                <h1 style={{ fontSize: 32, fontWeight: 700, marginBottom: 12, color: "#000" }}>Bird</h1>
+                <div style={{ fontSize: 16, opacity: 0.85, color: "#000" }}>
+                  Controls: <b>Space / ↑</b> or <b>click/tap</b>.<br />
+                  Restart with the <b>Restart</b> button. 
+                </div>
+              </div>
+            )}
+            
             {started && !running && (
               <div style={{ color: "#fff", fontWeight: 700, fontSize: 32, textAlign: "center" }}>
                 Game Over
@@ -566,11 +536,12 @@ export default function Home() {
                 padding: "10px 18px",
                 fontSize: 16,
                 fontWeight: 700,
-                background: "#fff",
-                color: "#000",
+                background: isMobile && !started ? "#000" : "#fff",
+                color: isMobile && !started ? "#fff" : "#000",
                 border: "none",
                 borderRadius: 60,
                 cursor: "pointer",
+                alignSelf: "center",
               }}
             >
               {started ? "Restart" : "Start"}
